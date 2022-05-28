@@ -33,4 +33,10 @@ public String getPrenom() {
 public void setPrenom(String prenom) {
 	this.prenom = prenom;
 }
+@Override
+public String toString() {
+	return "Etudiant [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+}
+
+
 }
