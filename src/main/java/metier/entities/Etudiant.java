@@ -41,7 +41,7 @@ public void setPrenom(String prenom) {
 }
 @Override
 public String toString() {
-	return "Etudiant [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+	return "Etudiant [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", departement=" + departement + "]";
 }
 public String getDepartement() {
 	return departement;

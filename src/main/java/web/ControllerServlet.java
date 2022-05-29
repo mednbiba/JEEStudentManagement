@@ -77,28 +77,30 @@ public class ControllerServlet extends HttpServlet {
 		else if (path.equals("/editer.do")  )
 		{
 			int id= Integer.parseInt(request.getParameter("id"));
-		    Etudiant p = metier.getEtudiant(id);
-		    request.setAttribute("produit", p);
+			Etudiant p = metier.getEtudiant(id);
+			System.out.print(p);
+			request.setAttribute("p", p);
 			request.getRequestDispatcher("editerEtudiant.jsp").forward(request,response);
+			
 		}
 		else if (path.equals("/update.do")  )
-		{
-			 
-			 String nom=request.getParameter("nom");
-			 String prenom=request.getParameter("prenom");
-			 String departement=request.getParameter("departement");
-			 Etudiant p = new Etudiant();
-			 int id= Integer.parseInt(request.getParameter("id"));
-			 p.setId(id);
-			 p.setDepartement(departement);
-			 p.setNom(nom);
-			 p.setPrenom(prenom);
-			 metier.updateEtudiant(p);
-			 request.setAttribute("etudiant", p);
-			 request.getRequestDispatcher("confirmation.jsp").forward(request,response);
+		{	int id= Integer.parseInt(request.getParameter("id"));
+			String nom=request.getParameter("nom");
+			String prenom=request.getParameter("prenom");
+			String departement=request.getParameter("departement");
+			Etudiant p = new Etudiant();
+			p.setId(id);
+			p.setNom(nom);
+			p.setPrenom(prenom);
+			p.setDepartement(departement);
+			System.out.print("-------------------------------");
+			System.out.print(p);
+			metier.updateEtudiant(p);
+			request.setAttribute("produit", p);
+			request.getRequestDispatcher("confirmation.jsp").forward(request,response);
 		}
 		else
-		{
+		{	
 			response.sendError(Response.SC_NOT_FOUND);		
 		}	
 	}

@@ -57,13 +57,14 @@ public class EtudiantDaoImp implements IEtudiantDao {
 		Connection conn=SingletonConnection.getConnection();
 		Etudiant e = new Etudiant();
 		try {
-			PreparedStatement ps = conn.prepareStatement("select from student where id=?");
+			PreparedStatement ps = conn.prepareStatement("select * from student where id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				e.setId(rs.getInt("id"));
 				e.setNom(rs.getString("nom"));
 				e.setPrenom(rs.getString("prenom"));
+				e.setDepartement(rs.getString("departement"));
 			}
 		}catch(SQLException x) {
 			x.printStackTrace();
@@ -79,11 +80,12 @@ public class EtudiantDaoImp implements IEtudiantDao {
 	public Etudiant updateEtudiant(Etudiant e) {
 		Connection conn=SingletonConnection.getConnection();
 		try {
-			PreparedStatement ps = conn.prepareStatement("UPDATE STUDENT SET nom=?,prenom=? WHERE ID=?");
+			PreparedStatement ps = conn.prepareStatement("UPDATE student SET nom=?, prenom=?, Departement=? WHERE ID=?");
 			ps.setString(1, e.getNom());
 			ps.setString(2,e.getPrenom());
+			ps.setString(3, e.getDepartement());
 			
-			ps.setInt(2, e.getId());
+			ps.setInt(4, e.getId());
 			ps.executeUpdate();
 			ps.close();
 		} catch(SQLException x) {

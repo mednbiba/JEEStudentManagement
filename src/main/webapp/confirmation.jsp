@@ -20,15 +20,15 @@
       
       <div class="form-group">
        <label class="control-label">NOM :</label>
-       <input type="text" name="Nom" class="form-control" value="${Etudiant.nomEtudiant }"/>
+       <input type="text" name="Nom" class="form-control" value="${p.nom }"/>
          
        <label class="control-label">PRENOM  :</label>
-       <input type="text" name="Nom" class="form-control" value="${Etudiant.prenomEtudiant }"/>
+       <input type="text" name="Nom" class="form-control" value="${p.prenom }"/>
       </div>
       
       <div class="control-label">
        <label class="control-label">Departement :</label>
-       <input type="text" name="Prix" class="form-control" value="${Etudiant.Departement }"/>
+       <input type="text" name="Prix" class="form-control" value="${p.Departement }"/>
       </div>
        </div>
          
