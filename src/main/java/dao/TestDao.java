@@ -10,12 +10,11 @@ public class TestDao {
 		
 		// Insert Test
 		EtudiantDaoImp edao= new EtudiantDaoImp();
-		Etudiant et= edao.save(new Etudiant("ali","mustapha"));
-		System.out.println(et);
+		//Etudiant et= edao.save(new Etudiant("ali","mustapha","departement"));
+		//System.out.println(et);
 		//Get List Test
-		List<Etudiant> ets = edao.etudiants();
+		List<Etudiant> ets = edao.etudiantsdpt("electronique");
 		for (Etudiant e : ets) {
-			System.out.println(e.getId()+e.getNom()+e.getPrenom());
 			System.out.println(e);
 		}
 	}

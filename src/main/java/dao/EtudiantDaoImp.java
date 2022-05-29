@@ -16,9 +16,10 @@ public class EtudiantDaoImp implements IEtudiantDao {
 	public Etudiant save(Etudiant e) {
 		Connection con =SingletonConnection.getConnection();
 		try {
-			PreparedStatement ps = con.prepareStatement("INSERT INTO STUDENT (nom,prenom) VALUES (?,?) ");
+			PreparedStatement ps = con.prepareStatement("INSERT INTO STUDENT (nom,prenom,departement) VALUES (?,?,?) ");
 			ps.setString(1, e.getNom());
 			ps.setString(2, e.getPrenom());
+			ps.setString(3, e.getDepartement());
 			ps.executeUpdate();
 			//Add SQL here
 		}catch(SQLException x) {
@@ -41,6 +42,7 @@ public class EtudiantDaoImp implements IEtudiantDao {
 				e.setId(rs.getInt("id"));
 				e.setNom(rs.getString("nom"));
 				e.setPrenom(rs.getString("prenom"));
+				e.setDepartement(rs.getString("Departement"));
 				etudiants.add(e);}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -80,6 +82,7 @@ public class EtudiantDaoImp implements IEtudiantDao {
 			PreparedStatement ps = conn.prepareStatement("UPDATE STUDENT SET nom=?,prenom=? WHERE ID=?");
 			ps.setString(1, e.getNom());
 			ps.setString(2,e.getPrenom());
+			
 			ps.setInt(2, e.getId());
 			ps.executeUpdate();
 			ps.close();
@@ -93,7 +96,7 @@ public class EtudiantDaoImp implements IEtudiantDao {
 	public void deleteEtudiant(int id) {
 		Connection conn=SingletonConnection.getConnection();
 		try {
-			PreparedStatement ps = conn.prepareStatement("DELETE FROM STUDNET WHERE ID=?");
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM STUDENT WHERE ID=?");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			ps.close();
@@ -104,5 +107,45 @@ public class EtudiantDaoImp implements IEtudiantDao {
 		}
 		
 	}
+
+	@Override
+	public List<Etudiant> etudiantsdpt(String dpt) {
+	
+				List<Etudiant> etudiants=new ArrayList<Etudiant>();
+				Connection conn=SingletonConnection.getConnection();
+				try {
+					
+					if(dpt=="") {
+						PreparedStatement ps = conn.prepareStatement("select * from student");
+						ResultSet rs = ps.executeQuery();
+						while (rs.next()) {
+							Etudiant e = new Etudiant();
+							e.setId(rs.getInt("id"));
+							e.setNom(rs.getString("nom"));
+							e.setPrenom(rs.getString("prenom"));
+							e.setDepartement(rs.getString("Departement"));
+							etudiants.add(e);}
+					}else {
+						
+					
+					PreparedStatement ps = conn.prepareStatement("select * from student where Departement=?");
+					ps.setString(1, dpt);
+					ResultSet rs = ps.executeQuery();
+					while (rs.next()) {
+						Etudiant e = new Etudiant();
+						e.setId(rs.getInt("id"));
+						e.setNom(rs.getString("nom"));
+						e.setPrenom(rs.getString("prenom"));
+						e.setDepartement(rs.getString("Departement"));
+						etudiants.add(e);}
+					}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				return etudiants;
+	
+	}
+
+
 
 }
